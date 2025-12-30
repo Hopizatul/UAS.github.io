@@ -92,9 +92,20 @@
         <section id="result-screen" class="screen hidden">
             <div class="content-box result-box">
                 <h2 id="result-title">Selesai!</h2>
-                <div class="score-circle">
-                    <span id="final-score">85</span>
+
+                <div class="stars-container" id="stars-display">
+                    <!-- Stars will be injected here -->
                 </div>
+
+                <div class="score-circle">
+                    <span id="final-score">0</span>
+                </div>
+
+                <div class="badge-container hidden" id="badge-display">
+                    <div class="badge-icon" id="badge-icon">🏆</div>
+                    <div class="badge-title" id="badge-name">Pemula</div>
+                </div>
+
                 <p id="result-message" class="result-msg">Selamat! Kamu naik level.</p>
 
                 <div class="result-actions">
@@ -104,6 +115,15 @@
                 </div>
             </div>
         </section>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="sfx-click" src="sounds/click.mp3" preload="auto"></audio>
+    <audio id="sfx-correct" src="sounds/correct.mp3" preload="auto"></audio>
+    <audio id="sfx-wrong" src="sounds/wrong.mp3" preload="auto"></audio>
+    <audio id="sfx-levelup" src="sounds/levelup.mp3" preload="auto"></audio>
+    </div>
+    </section>
     </div>
 
     <!-- Background Decoration -->

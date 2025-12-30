@@ -327,6 +327,21 @@ let currentState = {
     maxUnlockedLevel: 1
 };
 
+// Sound Effects
+const sounds = {
+    click: document.getElementById('sfx-click'),
+    correct: document.getElementById('sfx-correct'),
+    wrong: document.getElementById('sfx-wrong'),
+    levelup: document.getElementById('sfx-levelup')
+};
+
+function playSound(type) {
+    if (sounds[type]) {
+        sounds[type].currentTime = 0; // Rewind to start
+        sounds[type].play().catch(e => console.log("Audio play failed:", e));
+    }
+}
+
 // DOM Elements
 const screens = {
     welcome: document.getElementById('welcome-screen'),
@@ -347,17 +362,19 @@ function showScreen(screenName) {
     });
     screens[screenName].classList.remove('hidden');
     // Force reflow for animation
-    void screens[screenName].offsetWidth; 
+    void screens[screenName].offsetWidth;
     screens[screenName].classList.add('active');
 }
 
 // Initial Setup
 document.getElementById('btn-start').addEventListener('click', () => {
+    playSound('click');
     renderLevelGrid();
     showScreen('level');
 });
 
 document.querySelector('.back-home').addEventListener('click', () => {
+    playSound('click');
     showScreen('welcome');
 });
 
@@ -365,12 +382,12 @@ document.querySelector('.back-home').addEventListener('click', () => {
 function renderLevelGrid() {
     const grid = document.querySelector('.level-grid');
     grid.innerHTML = '';
-    
+
     LEVELS.forEach((level, idx) => {
         const isLocked = (idx + 1) > currentState.maxUnlockedLevel;
         const card = document.createElement('div');
         card.className = `level-card ${isLocked ? 'locked' : ''}`;
-        
+
         card.innerHTML = `
             <div class="level-info">
                 <h3>${level.title}</h3>
@@ -380,11 +397,14 @@ function renderLevelGrid() {
                 ${isLocked ? '🔒' : '▶'}
             </div>
         `;
-        
+
         if (!isLocked) {
-            card.addEventListener('click', () => openModeSelection(idx));
+            card.addEventListener('click', () => {
+                playSound('click');
+                openModeSelection(idx);
+            });
         }
-        
+
         grid.appendChild(card);
     });
 }
@@ -400,6 +420,7 @@ function openModeSelection(levelIdx) {
 
 document.querySelectorAll('.mode-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+        playSound('click');
         const mode = btn.dataset.mode;
         startLevel(pendingLevelIdx, mode);
         modals.mode.classList.add('hidden');
@@ -407,6 +428,7 @@ document.querySelectorAll('.mode-btn').forEach(btn => {
 });
 
 document.querySelector('.close-modal').addEventListener('click', () => {
+    playSound('click');
     modals.mode.classList.add('hidden');
 });
 
@@ -417,13 +439,13 @@ function startLevel(levelIdx, mode) {
     currentState.mode = mode;
     currentState.score = 0;
     currentState.qIdx = 0;
-    
+
     // Shuffle questions? Requirement says "7 soal acak".
     // Let's shuffle a copy of questions
     currentState.questions = [...currentState.currentLevel.questions]
         .sort(() => 0.5 - Math.random())
         .slice(0, 7); // Take 7 questions
-        
+
     updateGameHeader();
     showScreen('game');
     loadQuestion();
@@ -448,19 +470,22 @@ function loadQuestion() {
     const qText = document.getElementById('question-text');
     const feedback = document.getElementById('feedback-area');
     const nextBtn = document.getElementById('btn-next-q');
-    
+
     qText.textContent = qData.q;
     container.innerHTML = '';
     feedback.className = 'feedback hidden'; // Reset classes
     feedback.classList.add('hidden');
     nextBtn.classList.add('hidden');
-    
+
     if (currentState.mode === 'multiple-choice') {
         qData.options.forEach((opt, idx) => {
             const btn = document.createElement('button');
             btn.className = 'option-btn';
             btn.textContent = opt;
-            btn.onclick = () => checkAnswerMC(idx, btn);
+            btn.onclick = () => {
+                playSound('click');
+                checkAnswerMC(idx, btn);
+            };
             container.appendChild(btn);
         });
     } else {
@@ -468,13 +493,16 @@ function loadQuestion() {
         input.className = 'essay-input';
         input.placeholder = "Ketik jawabanmu di sini...";
         input.rows = 2;
-        
+
         const submitBtn = document.createElement('button');
         submitBtn.className = 'btn primary';
         submitBtn.textContent = 'Jawab';
         submitBtn.style.marginTop = '10px';
-        submitBtn.onclick = () => checkAnswerEssay(input.value);
-        
+        submitBtn.onclick = () => {
+            playSound('click');
+            checkAnswerEssay(input.value);
+        };
+
         container.appendChild(input);
         container.appendChild(submitBtn);
     }
@@ -484,10 +512,10 @@ function checkAnswerMC(selectedIndex, btnElement) {
     // Disable all buttons
     const buttons = document.querySelectorAll('.option-btn');
     buttons.forEach(b => b.disabled = true);
-    
+
     const qData = currentState.questions[currentState.qIdx];
     const isCorrect = (selectedIndex === qData.answer);
-    
+
     if (isCorrect) {
         btnElement.classList.add('correct');
         handleCorrect();
@@ -502,32 +530,34 @@ function checkAnswerMC(selectedIndex, btnElement) {
 function checkAnswerEssay(userAnswer) {
     const qData = currentState.questions[currentState.qIdx];
     const possibleAnswers = qData.essayAnswer;
-    
+
     // Simple normalization: lowercase and trim
     const normalizedMap = val => val.toLowerCase().trim();
     const userNorm = normalizedMap(userAnswer);
-    
+
     const isCorrect = possibleAnswers.some(ans => userNorm.includes(normalizedMap(ans)));
-    
+
     if (isCorrect) {
         handleCorrect();
     } else {
         handleWrong();
     }
-    
+
     // Disable input
     const input = document.querySelector('.essay-input');
     const btn = document.querySelector('#answers-container button');
-    if(input) input.disabled = true;
-    if(btn) btn.disabled = true;
+    if (input) input.disabled = true;
+    if (btn) btn.disabled = true;
 }
 
 function handleCorrect() {
     currentState.score += (100 / currentState.questions.length);
+    playSound('correct');
     showFeedback(true);
 }
 
 function handleWrong() {
+    playSound('wrong');
     showFeedback(false);
 }
 
@@ -535,24 +565,25 @@ function showFeedback(isCorrect) {
     const feedback = document.getElementById('feedback-area');
     const msg = document.getElementById('feedback-message');
     const nextBtn = document.getElementById('btn-next-q');
-    
+
     feedback.classList.remove('hidden', 'is-correct', 'is-wrong');
     feedback.classList.add(isCorrect ? 'is-correct' : 'is-wrong');
-    
+
     const qData = currentState.questions[currentState.qIdx];
-    
+
     msg.innerHTML = `<strong>${isCorrect ? 'Benar!' : 'Salah!'}</strong> <br> ${qData.explanation}`;
-    
+
     // Update score display
     document.getElementById('current-score').textContent = Math.round(currentState.score);
-    
+
     nextBtn.classList.remove('hidden');
-    
+
     // Scroll to bottom if needed
     feedback.scrollIntoView({ behavior: 'smooth' });
 }
 
 document.getElementById('btn-next-q').addEventListener('click', () => {
+    playSound('click');
     currentState.qIdx++;
     if (currentState.qIdx < currentState.questions.length) {
         updateProgress();
@@ -562,30 +593,73 @@ document.getElementById('btn-next-q').addEventListener('click', () => {
     }
 });
 
+function getStarRating(score) {
+    if (score >= 80) return 3;
+    if (score >= 60) return 2;
+    return 1;
+}
+
+function getBadge(levelIdx) {
+    // Level is 0-indexed in code (0-6), user sees 1-7
+    const userLevel = levelIdx + 1;
+    if (userLevel <= 2) return { title: "Pemula", icon: "🌱" };
+    if (userLevel <= 4) return { title: "Programmer Muda", icon: "💻" };
+    return { title: "Coding Hero", icon: "🦸‍♂️" };
+}
+
 function endLevel() {
     showScreen('result');
     const finalScore = Math.round(currentState.score);
-    const passed = finalScore >= 70;
-    
+    const passed = finalScore >= 60; // Adjusted threshold per star requirements (60 is 1 star)
+
+    // Update Score Circle
     document.getElementById('final-score').textContent = finalScore;
-    document.getElementById('result-title').textContent = passed ? "Lulus!" : "Belum Lulus";
-    document.getElementById('result-message').textContent = passed 
-        ? "Hebat! Kamu sudah menguasai materi level ini." 
-        : "Jangan menyerah! Coba lagi untuk memahami materi.";
-        
-    const nextLevelBtn = document.getElementById('btn-next-level');
-    
+
+    // Update Stars
+    const starCount = getStarRating(finalScore);
+    const starsContainer = document.getElementById('stars-display');
+    starsContainer.innerHTML = '';
+
+    // Create animated stars
+    for (let i = 1; i <= 3; i++) {
+        const star = document.createElement('span');
+        star.className = `star ${i <= starCount ? 'active' : ''}`;
+        star.innerHTML = '★';
+        star.style.animationDelay = `${i * 0.2}s`;
+        starsContainer.appendChild(star);
+    }
+
+    // Update Badge
+    const badgeContainer = document.getElementById('badge-display');
     if (passed) {
-        // Unlock next level if available and not already unlocked
+        playSound('levelup');
+        const badgeData = getBadge(currentState.levelIdx);
+        document.getElementById('badge-icon').textContent = badgeData.icon;
+        document.getElementById('badge-name').textContent = badgeData.title;
+        badgeContainer.classList.remove('hidden');
+
+        document.getElementById('result-title').textContent = "Lulus!";
+        document.getElementById('result-message').innerHTML = `
+            Hebat! Kamu mendapatkan <strong>${starCount} Bintang</strong>.<br>
+            Ayo lanjut ke level berikutnya!
+        `;
+    } else {
+        badgeContainer.classList.add('hidden');
+        document.getElementById('result-title').textContent = "Belum Lulus";
+        document.getElementById('result-message').textContent = "Nilai kamu masih dibawah 60. Yuk coba lagi!";
+    }
+
+    const nextLevelBtn = document.getElementById('btn-next-level');
+
+    if (passed) {
         if (currentState.levelIdx + 1 < LEVELS.length) {
-            // Check if we are at the max unlocked level
             if (currentState.levelIdx + 1 >= currentState.maxUnlockedLevel) {
                 currentState.maxUnlockedLevel = currentState.levelIdx + 2;
             }
             nextLevelBtn.classList.remove('hidden');
         } else {
-            nextLevelBtn.classList.add('hidden'); // End of game
-            document.getElementById('result-message').textContent += " Kamu telah menamatkan semua level!";
+            nextLevelBtn.classList.add('hidden');
+            document.getElementById('result-message').innerHTML += "<br><strong>Kamu telah menamatkan semua level!</strong>";
         }
     } else {
         nextLevelBtn.classList.add('hidden');
@@ -594,11 +668,12 @@ function endLevel() {
 
 // Result Screen Actions
 document.getElementById('btn-retry').addEventListener('click', () => {
-    // Retry same level, same mode (or could ask mode again, but usually retry implies same settings)
+    playSound('click');
     startLevel(currentState.levelIdx, currentState.mode);
 });
 
 document.getElementById('btn-next-level').addEventListener('click', () => {
+    playSound('click');
     const nextIdx = currentState.levelIdx + 1;
     if (nextIdx < LEVELS.length) {
         // Default to MC or ask mode? Let's ask mode for next level
@@ -609,5 +684,6 @@ document.getElementById('btn-next-level').addEventListener('click', () => {
 });
 
 document.getElementById('btn-home').addEventListener('click', () => {
+    playSound('click');
     showScreen('welcome');
 });

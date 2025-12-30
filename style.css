@@ -155,6 +155,7 @@ h1 {
     font-size: 2.5rem;
     margin-bottom: 0.5rem;
     background: linear-gradient(to right, var(--primary), var(--accent-blue));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -452,6 +453,75 @@ h1 {
 .result-msg {
     margin-bottom: 30px;
     font-size: 1.1rem;
+}
+
+/* Star Rating */
+.stars-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    height: 40px;
+    /* Preserve space */
+}
+
+.star {
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.2);
+    /* Inactive color */
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: scale(0);
+    animation: popIn 0.5s forwards;
+}
+
+.star.active {
+    color: #ffd700;
+    /* Gold */
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+}
+
+@keyframes popIn {
+    to {
+        transform: scale(1);
+    }
+}
+
+/* Badge System */
+.badge-container {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--accent-blue);
+    padding: 15px 25px;
+    border-radius: 12px;
+    margin: 0 auto 20px;
+    display: inline-block;
+    animation: slideUp 0.6s ease;
+    min-width: 200px;
+}
+
+.badge-icon {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.badge-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .result-actions {
