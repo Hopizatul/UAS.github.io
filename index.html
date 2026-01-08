@@ -58,8 +58,14 @@
 
         <!-- 4. Game Screen -->
         <section id="game-screen" class="screen hidden">
+            <button id="btn-back-quiz" class="sticky-back" aria-label="Kembali ke Menu">«</button>
+
             <div class="game-header">
-                <div class="level-badge">Level <span id="game-level-num">1</span></div>
+                <div class="header-top">
+                    <div class="level-badge">Level <span id="game-level-num">1</span></div>
+                    <div class="score-badge">Skor: <span id="current-score">0</span></div>
+                </div>
+
                 <div class="progress-container">
                     <div class="progress-text">Soal <span id="current-q-num">1</span> dari <span
                             id="total-q-num">7</span></div>
@@ -67,7 +73,6 @@
                         <div class="progress-bar-fill" id="progress-fill"></div>
                     </div>
                 </div>
-                <div class="score-badge">Skor: <span id="current-score">0</span></div>
             </div>
 
             <div class="question-card">

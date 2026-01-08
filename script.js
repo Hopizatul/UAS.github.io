@@ -2,316 +2,631 @@
 const LEVELS = [
     {
         id: 1,
-        title: "Level 1: Dasar Pemrograman",
-        description: "Mengenal variabel, tipe data, dan output.",
+        title: "Level 1: Pengenalan Pemrograman",
+        description: "Konsep dasar: program, input, dan output.",
         questions: [
             {
                 type: "mc",
-                q: "Apa itu 'Variabel' dalam pemrograman?",
-                options: ["Wadah untuk menyimpan data", "Layar monitor", "Jenis keyboard", "Internet"],
+                q: "Apa itu 'Program' komputer?",
+                options: ["Kumpulan instruksi untuk komputer", "Alat pembersih virus", "Bagian dari hardware monitor", "Game online saja"],
                 answer: 0,
-                essayAnswer: ["wadah", "tempat data", "penyimpan"],
-                explanation: "Variabel adalah tempat di memori komputer untuk menyimpan nilai atau data."
+                essayAnswer: ["instruksi", "kumpulan instruksi", "kode"],
+                explanation: "Program adalah serangkaian instruksi yang ditulis untuk memberitahu komputer apa yang harus dilakukan."
             },
             {
                 type: "mc",
-                q: "Manakah yang merupakan tipe data angka bulat?",
-                options: ["String", "Integer", "Boolean", "Float"],
+                q: "Perintah untuk menampilkan output ke layar disebut...",
+                options: ["Input", "Output / Print", "Process", "Delete"],
                 answer: 1,
-                essayAnswer: ["integer", "int"],
-                explanation: "Integer (int) adalah tipe data untuk angka bulat tanpa desimal."
+                essayAnswer: ["output", "print", "console.log"],
+                explanation: "Output adalah hasil pemrosesan yang ditampilkan, seringkali menggunakan perintah print atau console.log."
             },
             {
                 type: "mc",
-                q: "Perintah umum untuk menampilkan teks ke layar adalah...",
-                options: ["input()", "print() / console.log()", "scan()", "get()"],
+                q: "Data yang dimasukkan pengguna ke dalam program disebut...",
+                options: ["Output", "Input", "Loop", "Bug"],
                 answer: 1,
-                essayAnswer: ["print", "console.log", "output"],
-                explanation: "print() atau console.log() digunakan untuk mencetak output ke layar."
+                essayAnswer: ["input"],
+                explanation: "Input adalah data atau informasi yang diterima program dari pengguna atau sumber lain."
             },
             {
                 type: "mc",
-                q: "Tipe data 'String' ditandai dengan...",
-                options: ["Kurung kurawal {}", "Tanda kutip ''", "Tanda pagar #", "Titik koma ;"],
-                answer: 1,
-                essayAnswer: ["tanda kutip", "kutip"],
-                explanation: "String adalah teks yang diapit oleh tanda kutip tunggal atau ganda."
-            },
-            {
-                type: "mc",
-                q: "Apa nilai dari tipe data Boolean?",
-                options: ["Angka 1-10", "Huruf A-Z", "True atau False", "Kosong"],
+                q: "Manakah contoh bahasa pemrograman?",
+                options: ["HTML", "Microsoft Word", "Python", "Google Chrome"],
                 answer: 2,
-                essayAnswer: ["true false", "benar salah"],
-                explanation: "Boolean hanya memiliki dua nilai: True (Benar) atau False (Salah)."
+                essayAnswer: ["python", "java", "cpp", "javascript"],
+                explanation: "Python, Java, C++, dan JavaScript adalah contoh bahasa pemrograman. HTML adalah bahasa markup."
             },
             {
                 type: "mc",
-                q: "Simbol '=' biasanya digunakan untuk...",
-                options: ["Membandingkan", "Assignment (Pemberian nilai)", "Menghapus", "Looping"],
+                q: "Langkah pertama dalam membuat program biasanya adalah...",
+                options: ["Menulis kode langsung", "Memahami masalah & Algoritma", "Mendesain logo", "Merakit komputer"],
                 answer: 1,
-                essayAnswer: ["assignment", "pemberian nilai", "assign"],
-                explanation: "Tanda '=' digunakan untuk memasukkan nilai ke dalam variabel (Assignment)."
+                essayAnswer: ["algoritma", "paham masalah", "desain logika"],
+                explanation: "Sebelum menulis kode (coding), programmer harus memahami masalah dan merancang algoritma."
             },
             {
                 type: "mc",
-                q: "Komentar dalam kode berfungsi untuk...",
-                options: ["Dijalankan komputer", "Catatan untuk programmer", "Membuat error", "Menghapus file"],
-                answer: 1,
-                essayAnswer: ["catatan", "dokumentasi", "penjelas"],
-                explanation: "Komentar diabaikan oleh komputer dan hanya untuk dibaca manusia."
+                q: "Kode sumber (Source Code) ditulis menggunakan...",
+                options: ["Teks Editor / IDE", "Paint", "Calculator", "Music Player"],
+                answer: 0,
+                essayAnswer: ["teks editor", "ide", "editor"],
+                explanation: "Programmer menulis kode di Text Editor (seperti Notepad++, VS Code) atau IDE."
+            },
+            {
+                type: "mc",
+                q: "Apa tugas dari 'Compiler' atau 'Interpreter'?",
+                options: ["Menerjemahkan kode ke bahasa mesin", "Menghapus kode", "Memperbaiki komputer rusak", "Menyimpan file"],
+                answer: 0,
+                essayAnswer: ["terjemah", "translator", "kompilasi"],
+                explanation: "Mereka menerjemahkan kode yang ditulis manusia menjadi instruksi yang dimengerti mesin (biner)."
             }
         ]
     },
     {
         id: 2,
-        title: "Level 2: Logika & Kondisi",
-        description: "IF-ELSE dan operator logika.",
+        title: "Level 2: Variabel & Tipe Data",
+        description: "Integer, string, boolean, deklarasi variabel.",
         questions: [
             {
                 type: "mc",
-                q: "Apa fungsi dari 'IF'?",
-                options: ["Mengulang kode", "Membuat keputusan", "Menghapus data", "Menyimpan file"],
-                answer: 1,
-                essayAnswer: ["keputusan", "kondisi", "percabangan"],
-                explanation: "IF digunakan untuk menjalankan kode hanya jika kondisi tertentu terpenuhi."
+                q: "Apa itu 'Variabel'?",
+                options: ["Wadah penyimpanan data", "Nilai tetap", "Fungsi matematika", "Perulangan"],
+                answer: 0,
+                essayAnswer: ["wadah", "penyimpan data", "tempat data"],
+                explanation: "Variabel ibarat wadah atau kotak untuk menyimpan nilai data di memori."
             },
             {
                 type: "mc",
-                q: "Operator '==' digunakan untuk...",
-                options: ["Assignment", "Perbandingan sama dengan", "Perbandingan lebih besar", "Logika AND"],
+                q: "Manakah yang merupakan tipe data bilangan bulat?",
+                options: ["String", "Integer", "Float", "Boolean"],
                 answer: 1,
-                essayAnswer: ["perbandingan", "sama dengan", "banding"],
-                explanation: "'==' membandingkan apakah dua nilai sama."
+                essayAnswer: ["integer", "int"],
+                explanation: "Integer (int) digunakan untuk menyimpan bilangan bulat (contoh: 5, -10, 100)."
             },
             {
                 type: "mc",
-                q: "Jika (5 > 3) maka hasilnya adalah...",
-                options: ["False", "True", "Error", "Null"],
+                q: "Tipe data 'String' digunakan untuk...",
+                options: ["Angka desimal", "Teks / Karakter", "Kondisi Benar/Salah", "List data"],
                 answer: 1,
-                essayAnswer: ["true", "benar"],
-                explanation: "5 memang lebih besar dari 3, jadi hasilnya True."
+                essayAnswer: ["teks", "karakter", "tulisan"],
+                explanation: "String adalah tipe data untuk teks, biasanya diapit tanda kutip (contoh: 'Halo')."
             },
             {
                 type: "mc",
-                q: "'ELSE' dijalankan ketika...",
-                options: ["Kondisi IF benar", "Kondisi IF salah", "Selalu dijalankan", "Tidak pernah dijalankan"],
-                answer: 1,
-                essayAnswer: ["salah", "if salah", "false"],
-                explanation: "Blok ELSE dieksekusi jika kondisi IF sebelumnya bernilai False."
-            },
-            {
-                type: "mc",
-                q: "Operator logika 'AND' bernilai True jika...",
-                options: ["Salah satu benar", "Semua salah", "Semua benar", "Hanya satu benar"],
+                q: "Nilai dari tipe data Boolean adalah...",
+                options: ["1 sampai 10", "A sampai Z", "True atau False", "Positif atau Negatif"],
                 answer: 2,
-                essayAnswer: ["semua benar", "keduanya benar"],
-                explanation: "AND hanya True jika semua kondisi yang diuji bernilai True."
+                essayAnswer: ["true false", "benar salah"],
+                explanation: "Boolean hanya memiliki dua kemungkinan nilai: True (Benar) atau False (Salah)."
             },
             {
                 type: "mc",
-                q: "Simbol untuk 'Tidak Sama Dengan' adalah...",
-                options: ["==", "!=", "<>", "><"],
+                q: "Contoh penulisan String yang benar adalah...",
+                options: ["Hello", "'Hello'", "123", "True"],
                 answer: 1,
-                essayAnswer: ["!=", "tidak sama"],
-                explanation: "'!=' adalah simbol umum untuk ketidaksamaan."
+                essayAnswer: ["'hello'", "\"hello\""],
+                explanation: "String harus diapit oleh tanda kutip tunggal ('...') atau ganda (\"...\")."
             },
             {
                 type: "mc",
-                q: "Struktur 'Switch-Case' mirip dengan...",
-                options: ["Looping", "If-Else bertingkat", "Array", "Fungsi"],
-                answer: 1,
-                essayAnswer: ["if else", "percabangan"],
-                explanation: "Switch-Case adalah alternatif rapi untuk banyak kondisi IF-ELSE."
+                q: "Untuk menyimpan nilai 3.14, tipe data yang cocok adalah...",
+                options: ["Integer", "String", "Float / Double", "Boolean"],
+                answer: 2,
+                essayAnswer: ["float", "double", "desimal"],
+                explanation: "Float atau Double digunakan untuk bilangan pecahan/desimal."
+            },
+            {
+                type: "mc",
+                q: "Proses pembuatan variabel disebut...",
+                options: ["Deklarasi", "Iterasi", "Kompilasi", "Eksekusi"],
+                answer: 0,
+                essayAnswer: ["deklarasi", "inisialisasi"],
+                explanation: "Mengenalkan nama variabel ke program disebut deklarasi."
             }
         ]
     },
     {
         id: 3,
-        title: "Level 3: Perulangan (Loop)",
-        description: "For, While, dan iterasi.",
+        title: "Level 3: Operator & Ekspresi",
+        description: "Aritmatika, perbandingan, dan logika dasar.",
         questions: [
             {
                 type: "mc",
-                q: "Tujuan utama 'Looping' adalah...",
-                options: ["Menghenti program", "Menjalankan kode berulang kali", "Membuat variabel", "Matematika"],
-                answer: 1,
-                essayAnswer: ["berulang", "ulang", "repetisi"],
-                explanation: "Looping digunakan untuk mengulangi eksekusi blok kode."
+                q: "Simbol '*' dalam pemrograman biasanya berarti...",
+                options: ["Kali", "Bagi", "Tambah", "Pangkat"],
+                answer: 0,
+                essayAnswer: ["kali", "perkalian"],
+                explanation: "Tanda bintang (*) adalah operator untuk perkalian."
             },
             {
                 type: "mc",
-                q: "Loop yang berjalan selama kondisi benar disebut...",
-                options: ["For Loop", "While Loop", "If Loop", "End Loop"],
+                q: "Hasil dari 10 % 3 (Modulus) adalah...",
+                options: ["3", "1", "0", "3.33"],
                 answer: 1,
-                essayAnswer: ["while", "while loop"],
-                explanation: "While loop terus berjalan selama kondisinya True."
+                essayAnswer: ["1", "satu"],
+                explanation: "Modulus (%) mencari sisa bagi. 10 dibagi 3 adalah 3 sisa 1."
             },
             {
                 type: "mc",
-                q: "Apa itu 'Infinite Loop'?",
-                options: ["Loop yang cepat", "Loop yang tidak pernah berhenti", "Loop satu kali", "Loop error"],
-                answer: 1,
-                essayAnswer: ["tak berhenti", "selamanya", "infinite"],
-                explanation: "Infinite loop terjadi jika kondisi berhenti tidak pernah tercapai."
+                q: "Operator perbandingan '==' artinya...",
+                options: ["Sama dengan", "Lebih besar", "Tidak sama", "Penugasan"],
+                answer: 0,
+                essayAnswer: ["sama dengan", "setara"],
+                explanation: "'==' digunakan untuk membandingkan apakah dua nilai sama."
             },
             {
                 type: "mc",
-                q: "Dalam 'For i = 1 to 5', berapa kali loop berjalan?",
-                options: ["1 kali", "4 kali", "5 kali", "Tak hingga"],
+                q: "Operator Logika 'AND' (&&) bernilai True jika...",
+                options: ["Salah satu benar", "Semua salah", "Semua kondisi benar", "Tidak ada yang benar"],
                 answer: 2,
-                essayAnswer: ["5", "5 kali", "lima"],
-                explanation: "Loop akan berjalan untuk nilai i: 1, 2, 3, 4, 5."
+                essayAnswer: ["semua benar", "keduanya benar"],
+                explanation: "Logika AND hanya menghasilkan True jika SEMUA kondisi yang diuji bernilai True."
             },
             {
                 type: "mc",
-                q: "'Break' digunakan untuk...",
-                options: ["Melanjutkan loop", "Memulai loop", "Menghentikan loop paksa", "Menghapus loop"],
+                q: "Manakah operator 'Tidak Sama Dengan'?",
+                options: ["==", "=", "!=", "<>"],
                 answer: 2,
-                essayAnswer: ["henti", "stop", "keluar"],
-                explanation: "Break menghentikan perulangan seketika itu juga."
+                essayAnswer: ["!=", "tidak sama"],
+                explanation: "'!=' (atau <> di beberapa bahasa) berarti tidak sama dengan."
             },
             {
                 type: "mc",
-                q: "'Continue' digunakan untuk...",
-                options: ["Stop loop", "Lewati sisa kode & lanjut putaran berikut", "Keluar program", "Cetak nilai"],
-                answer: 1,
-                essayAnswer: ["lewati", "lanjut", "skip"],
-                explanation: "Continue melewati sisa kode di iterasi saat ini dan lanjut ke iterasi berikutnya."
+                q: "Jika A = True dan B = False, maka A OR B adalah...",
+                options: ["True", "False", "Error", "Null"],
+                answer: 0,
+                essayAnswer: ["true", "benar"],
+                explanation: "Logika OR (||) bernilai True jika SALAH SATU atau KEDUANYA benar."
             },
             {
                 type: "mc",
-                q: "Manakah yang cocok untuk meloop data Array?",
-                options: ["If-Else", "For / Foreach", "Switch", "Variable"],
-                answer: 1,
-                essayAnswer: ["for", "foreach"],
-                explanation: "For atau Foreach loop paling umum digunakan untuk memproses setiap item array."
+                q: "Operator assignment dasar adalah...",
+                options: ["=", "==", "+", ":"],
+                answer: 0,
+                essayAnswer: ["=", "sama dengan"],
+                explanation: "Tanda '=' digunakan untuk memberi nilai ke variabel (Assignment)."
             }
         ]
     },
     {
         id: 4,
-        title: "Level 4: Fungsi & Array",
-        description: "Struktur data list dan modularitas.",
+        title: "Level 4: Percabangan (IF-ELSE)",
+        description: "Pengambilan keputusan dalam program.",
         questions: [
             {
                 type: "mc",
-                q: "Array adalah...",
-                options: ["Satu data tunggal", "Kumpulan data dalam satu variabel", "Fungsi matematika", "Loop"],
+                q: "Struktur IF digunakan untuk...",
+                options: ["Mengulang kode", "Membuat keputusan berdasarkan kondisi", "Menyimpan data", "Keluar aplikasi"],
                 answer: 1,
-                essayAnswer: ["kumpulan data", "list", "himpunan"],
-                explanation: "Array menyimpan banyak nilai dalam satu variabel tunggal."
+                essayAnswer: ["keputusan", "kondisi", "percabangan"],
+                explanation: "IF mengecek kondisi, jika benar maka blok kode dijalankan."
             },
             {
                 type: "mc",
-                q: "Indeks array biasanya dimulai dari...",
-                options: ["1", "0", "-1", "10"],
+                q: "Bagian 'ELSE' akan dijalankan jika...",
+                options: ["Kondisi IF benar", "Kondisi IF salah", "Selalu dijalankan", "Tidak ada kondisi"],
                 answer: 1,
-                essayAnswer: ["0", "nol"],
-                explanation: "Dalam kebanyakan bahasa (JS, Python, C), indeks dimulai dari 0."
+                essayAnswer: ["if salah", "salah", "false"],
+                explanation: "ELSE menangani skenario ketika kondisi IF tidak terpenuhi (False)."
             },
             {
                 type: "mc",
-                q: "Fungsi (Function) berguna untuk...",
-                options: ["Mempersulit kode", "Reuse (menggunakan kembali) kode", "Membuat virus", "Menambah memori"],
-                answer: 1,
-                essayAnswer: ["reuse", "ulang pakai", "modular"],
-                explanation: "Fungsi membungkus kode agar bisa dipanggil berkali-kali tanpa menulis ulang."
-            },
-            {
-                type: "mc",
-                q: "Nilai yang dikirim ke dalam fungsi disebut...",
-                options: ["Parameter / Argumen", "Variabel", "Output", "Return"],
+                q: "Apa output jika: Nilai = 80. IF (Nilai > 70) print 'Lulus' ELSE print 'Gagal'?",
+                options: ["Lulus", "Gagal", "Error", "Tidak ada output"],
                 answer: 0,
-                essayAnswer: ["parameter", "argumen"],
-                explanation: "Parameter adalah input yang diterima oleh fungsi."
+                essayAnswer: ["lulus"],
+                explanation: "Karena 80 > 70 bernilai True, maka program mencetak 'Lulus'."
             },
             {
                 type: "mc",
-                q: "Kata kunci untuk mengembalikan nilai dari fungsi adalah...",
-                options: ["send", "back", "return", "output"],
+                q: "Untuk mengecek banyak kondisi bertingkat, kita gunakan...",
+                options: ["IF-ELSE IF-ELSE", "Looping", "Function", "Array"],
+                answer: 0,
+                essayAnswer: ["else if", "elif", "bertingkat"],
+                explanation: "ELSE IF memungkinkan kita mengecek kondisi baru jika kondisi sebelumnya salah."
+            },
+            {
+                type: "mc",
+                q: "Struktur pengganti IF-ELSE yang membaca nilai variabel tertentu adalah...",
+                options: ["Switch-Case", "For Loop", "While Loop", "Do-While"],
+                answer: 0,
+                essayAnswer: ["switch case", "switch"],
+                explanation: "Switch-Case digunakan untuk memilih satu dari banyak blok kode berdasarkan nilai variabel."
+            },
+            {
+                type: "mc",
+                q: "Kondisi dalam IF harus menghasilkan nilai...",
+                options: ["Integer", "String", "Boolean (True/False)", "Array"],
                 answer: 2,
-                essayAnswer: ["return"],
-                explanation: "Return mengakhiri fungsi dan mengirimkan nilai kembali ke pemanggil."
+                essayAnswer: ["boolean", "true false"],
+                explanation: "Percabangan bergantung pada nilai kebenaran (Boolean) dari suatu kondisi."
             },
             {
                 type: "mc",
-                q: "Array arr = [10, 20, 30]. Berapa nilai arr[1]?",
-                options: ["10", "20", "30", "Error"],
-                answer: 1,
-                essayAnswer: ["20"],
-                explanation: "Indeks ke-1 adalah elemen kedua, yaitu 20."
-            },
-            {
-                type: "mc",
-                q: "Cara memanggil fungsi 'sapa'?",
-                options: ["call sapa", "sapa()", "run sapa", "sapa"],
-                answer: 1,
-                essayAnswer: ["sapa()"],
-                explanation: "Tanda kurung () digunakan untuk mengeksekusi/memanggil fungsi."
+                q: "Apa simbol untuk blok kode dalam banyak bahasa (seperti JS/C++)?",
+                options: ["()", "[]", "{}", "<>"],
+                answer: 2,
+                essayAnswer: ["kurung kurawal", "curly braces", "{}"],
+                explanation: "Kurung kurawal {} menandai awal dan akhir dari blok kode instruksi."
             }
         ]
     },
     {
         id: 5,
-        title: "Level 5: Konsep Lanjut",
-        description: "OOP dasar dan konsep web.",
+        title: "Level 5: Perulangan (Loop)",
+        description: "For, While, dan konsep iterasi.",
         questions: [
             {
                 type: "mc",
-                q: "Apa itu 'Object'?",
-                options: ["Hanya teks", "Entitas dengan properti dan method", "Angka saja", "Looping"],
+                q: "Fungsi utama Looping adalah...",
+                options: ["Membuat keputusan", "Menjalankan kode berulang kali", "Menyimpan file", "Matematika"],
                 answer: 1,
-                essayAnswer: ["properti method", "data dan fungsi"],
-                explanation: "Objek membungkus data (properti) dan perilaku (method) menjadi satu kesatuan."
+                essayAnswer: ["ulang", "repetisi", "berulang"],
+                explanation: "Looping mengotomatiskan tugas yang perlu dilakukan berkali-kali."
             },
             {
                 type: "mc",
-                q: "HTML adalah singkatan dari...",
-                options: ["Hyper Text Markup Language", "High Tech Multi Language", "Home Tool Markup", "None"],
+                q: "Loop yang jumlah perulangannya sudah diketahui pasti biasanya menggunakan...",
+                options: ["For Loop", "While Loop", "If statement", "Switch"],
                 answer: 0,
-                essayAnswer: ["hyper text markup language"],
-                explanation: "HTML adalah bahasa markup standar untuk dokumen web."
+                essayAnswer: ["for", "for loop"],
+                explanation: "For Loop ideal untuk iterasi dengan jumlah yang pasti (misal: 1 sampai 10)."
             },
             {
                 type: "mc",
-                q: "CSS digunakan untuk...",
-                options: ["Logika program", "Styling / Desain tampilan", "Menyimpan database", "Server"],
+                q: "Loop yang berjalan terus SELAMA kondisi belum terpenuhi biasanya menggunakan...",
+                options: ["For Loop", "While Loop", "If statement", "Array"],
                 answer: 1,
-                essayAnswer: ["style", "desain", "tampilan", "gaya"],
-                explanation: "CSS (Cascading Style Sheets) mengatur tampilan elemen HTML."
+                essayAnswer: ["while", "while loop"],
+                explanation: "While Loop mengecek kondisi dulu, dan terus berjalan selama kondisinya True."
             },
             {
                 type: "mc",
-                q: "DOM adalah singkatan dari...",
-                options: ["Data Objects Model", "Document Object Model", "Disk Operating Mode", "Digital O"],
+                q: "Apa itu 'Infinite Loop'?",
+                options: ["Loop super cepat", "Loop yang tidak pernah berhenti", "Loop sekali jalan", "Loop kosong"],
                 answer: 1,
-                essayAnswer: ["document object model"],
-                explanation: "DOM adalah representasi struktur halaman web yang bisa diubah oleh JS."
+                essayAnswer: ["tak berhenti", "loop abadi", "error"],
+                explanation: "Infinite loop terjadi jika tidak ada kondisi yang menghentikan perulangan."
             },
             {
                 type: "mc",
-                q: "Event Listener berfungsi untuk...",
-                options: ["Mendengarkan musik", "Mendeteksi interaksi user (klik/ketik)", "Mengirim email", "Sleep"],
+                q: "Perintah 'Break' dalam loop berfungsi untuk...",
+                options: ["Lanjut ke putaran berikut", "Menghentikan loop seketika", "Menghapus loop", "Mempercepat loop"],
                 answer: 1,
-                essayAnswer: ["interaksi", "deteksi input", "respons"],
-                explanation: "Event listener menunggu kejadian tertentu (seperti klik) lalu menjalankan kode."
+                essayAnswer: ["henti", "keluar", "stop"],
+                explanation: "Break memaksa program keluar dari dalam loop."
             },
             {
                 type: "mc",
-                q: "Bug adalah...",
-                options: ["Serangga", "Fitur tambahan", "Kesalahan dalam kode", "Virus"],
+                q: "Dalam 'for (i=0; i<5; i++)', loop berjalan berapa kali?",
+                options: ["4", "5", "6", "0"],
+                answer: 1,
+                essayAnswer: ["5", "lima"],
+                explanation: "Loop berjalan untuk i = 0, 1, 2, 3, 4. Total 5 kali."
+            },
+            {
+                type: "mc",
+                q: "Variabel 'i' dalam loop sering disebut sebagai...",
+                options: ["Index / Counter", "Input", "Output", "Constant"],
+                answer: 0,
+                essayAnswer: ["counter", "penghitung", "index"],
+                explanation: "Variabel ini menghitung sudah berapa kali loop berjalan."
+            }
+        ]
+    },
+    {
+        id: 6,
+        title: "Level 6: Array & List",
+        description: "Penyimpanan banyak data dan akses indeks.",
+        questions: [
+            {
+                type: "mc",
+                q: "Apa itu Array?",
+                options: ["Satu variabel untuk satu nilai", "Satu variabel untuk banyak nilai", "Fungsi matematika", "Looping"],
+                answer: 1,
+                essayAnswer: ["banyak nilai", "kumpulan data", "list"],
+                explanation: "Array adalah struktur data yang dapat menyimpan sekumpulan nilai dalam satu nama variabel."
+            },
+            {
+                type: "mc",
+                q: "Indeks pertama dalam Array biasanya dimulai dari...",
+                options: ["1", "0", "-1", "10"],
+                answer: 1,
+                essayAnswer: ["0", "nol"],
+                explanation: "Dalam bahasa pemrograman populer (C, Java, JS, Python), indeks array dimulai dari 0."
+            },
+            {
+                type: "mc",
+                q: "Jika arr = [10, 20, 30], berapakah arr[2]?",
+                options: ["10", "20", "30", "Error"],
                 answer: 2,
-                essayAnswer: ["error", "kesalahan", "masalah"],
-                explanation: "Bug adalah istilah untuk error atau perilaku yang tidak diinginkan dalam software."
+                essayAnswer: ["30", "tiga puluh"],
+                explanation: "Indeks: 0->10, 1->20, 2->30. Jadi arr[2] adalah 30."
             },
             {
                 type: "mc",
-                q: "Algoritma adalah...",
-                options: ["Bahasa pemrograman", "Urutan langkah penyelesaian masalah", "Hardware", "Internet"],
+                q: "Untuk mengetahui jumlah data dalam Array, kita gunakan properti...",
+                options: ["size", "length", "width", "count"],
                 answer: 1,
-                essayAnswer: ["langkah", "urutan", "step by step"],
-                explanation: "Algoritma adalah langkah-langkah logis untuk menyelesaikan suatu tugas."
+                essayAnswer: ["length", "panjang"],
+                explanation: "Property .length (di JS/Java) atau len() (di Python) memberi tahu jumlah item."
+            },
+            {
+                type: "mc",
+                q: "Menambah data baru ke dalam Array disebut...",
+                options: ["Push / Insert", "Pop", "Delete", "Loop"],
+                answer: 0,
+                essayAnswer: ["push", "insert", "tambah"],
+                explanation: "Push (JS) atau Append (Python) digunakan untuk memasukkan data baru ke array."
+            },
+            {
+                type: "mc",
+                q: "Array dapat menampung tipe data...",
+                options: ["Hanya Integer", "Hanya String", "Berbagai tipe data", "Tidak bisa simpan data"],
+                answer: 2,
+                essayAnswer: ["berbagai", "semua", "campuran"],
+                explanation: "Di banyak bahasa dinamis (seperti JS/Python), array bisa diisi campuran tipe data."
+            },
+            {
+                type: "mc",
+                q: "Apa itu Array Multidimensi?",
+                options: ["Array di dalam Array", "Array kosong", "Array error", "Array satu data"],
+                answer: 0,
+                essayAnswer: ["array dalam array", "matriks", "tabel"],
+                explanation: "Array multidimensi (seperti matriks) adalah array yang elemennya juga berupa array."
+            }
+        ]
+    },
+    {
+        id: 7,
+        title: "Level 7: Fungsi (Function)",
+        description: "Parameter, return value, modularisasi kode.",
+        questions: [
+            {
+                type: "mc",
+                q: "Apa kegunaan utama Fungsi?",
+                options: ["Memperlambat program", "Menggunakan kembali kode (Reuse)", "Memenuhi memori", "Membuat error"],
+                answer: 1,
+                essayAnswer: ["reuse", "penggunaan ulang", "modular"],
+                explanation: "Fungsi memungkinkan kita menulis kode sekali dan memanggilnya berkali-kali."
+            },
+            {
+                type: "mc",
+                q: "Data yang dikirimkan ke dalam fungsi disebut...",
+                options: ["Parameter / Argumen", "Variabel Lokal", "Output", "Return"],
+                answer: 0,
+                essayAnswer: ["parameter", "argumen"],
+                explanation: "Parameter adalah variabel input yang diterima oleh fungsi."
+            },
+            {
+                type: "mc",
+                q: "Perintah 'Return' digunakan untuk...",
+                options: ["Mengulang fungsi", "Mengembalikan nilai output", "Menghapus fungsi", "Print ke layar"],
+                answer: 1,
+                essayAnswer: ["kembali", "return value", "output"],
+                explanation: "Return mengakhiri eksekusi fungsi dan memberikan hasil (output) ke pemanggil."
+            },
+            {
+                type: "mc",
+                q: "Apa itu fungsi 'Void'?",
+                options: ["Fungsi yang mengembalikan angka", "Fungsi yang tidak mengembalikan nilai", "Fungsi error", "Fungsi utama"],
+                answer: 1,
+                essayAnswer: ["tidak mengembalikan nilai", "tanpa return", "no return"],
+                explanation: "Fungsi void menjalankan aksi (seperti print) tetapi tidak menghasilkan nilai return."
+            },
+            {
+                type: "mc",
+                q: "Pemanggilan fungsi dilakukan dengan tanda...",
+                options: ["[]", "{}", "()", "<>"],
+                answer: 2,
+                essayAnswer: ["()", "kurung"],
+                explanation: "Tanda kurung () digunakan untuk memanggil (invoke) sebuah fungsi."
+            },
+            {
+                type: "mc",
+                q: "Variabel yang hanya dikenal di dalam fungsi disebut...",
+                options: ["Variabel Global", "Variabel Lokal", "Konstanta", "Parameter"],
+                answer: 1,
+                essayAnswer: ["lokal", "local"],
+                explanation: "Variabel lokal hanya hidup di dalam scope fungsi tersebut."
+            },
+            {
+                type: "mc",
+                q: "Konsep memecah program besar menjadi fungsi-fungsi kecil disebut...",
+                options: ["Modularisasi", "Komplikasi", "Duplikasi", "Looping"],
+                answer: 0,
+                essayAnswer: ["modular", "modularisasi"],
+                explanation: "Modularisasi membuat kode lebih rapi, mudah dibaca, dan mudah dikelola."
+            }
+        ]
+    },
+    {
+        id: 8,
+        title: "Level 8: Object & OOP Dasar",
+        description: "Class, object, properti, dan method.",
+        questions: [
+            {
+                type: "mc",
+                q: "OOP adalah singkatan dari...",
+                options: ["Object Oriented Programming", "Only One Program", "Object Over Process", "Organization of Program"],
+                answer: 0,
+                essayAnswer: ["object oriented programming"],
+                explanation: "OOP adalah paradigma pemrograman berbasis objek."
+            },
+            {
+                type: "mc",
+                q: "Blueprint atau cetakan untuk membuat objek disebut...",
+                options: ["Class", "Method", "Variable", "Array"],
+                answer: 0,
+                essayAnswer: ["class", "kelas"],
+                explanation: "Class adalah definisi/cetakan, sedangkan Object adalah wujud nyatanya (instance)."
+            },
+            {
+                type: "mc",
+                q: "Data/ciri-ciri yang dimiliki oleh objek disebut...",
+                options: ["Method", "Properti / Atribut", "Function", "Loop"],
+                answer: 1,
+                essayAnswer: ["properti", "atribut"],
+                explanation: "Contoh: Objek Mobil punya properti warna, merk, jumlah roda."
+            },
+            {
+                type: "mc",
+                q: "Perilaku atau aksi yang bisa dilakukan objek disebut...",
+                options: ["Properti", "Method", "Background", "String"],
+                answer: 1,
+                essayAnswer: ["method", "metode"],
+                explanation: "Method adalah fungsi yang menempel pada objek (contoh: mobil.maju())."
+            },
+            {
+                type: "mc",
+                q: "Konsep 'Inheritance' dalam OOP berarti...",
+                options: ["Pewarisan sifat dari Parent ke Child", "Objek yang banyak", "Menghapus objek", "Polimorfisme"],
+                answer: 0,
+                essayAnswer: ["pewarisan", "turunan"],
+                explanation: "Inheritance memungkinkan class baru mewarisi properti/method dari class yang sudah ada."
+            },
+            {
+                type: "mc",
+                q: "Membuat objek baru dari sebuah class disebut...",
+                options: ["Instansiasi", "Deklarasi", "Looping", "Inheritance"],
+                answer: 0,
+                essayAnswer: ["instansiasi", "instance"],
+                explanation: "Instansiasi adalah proses penciptaan objek (instance) dari sebuah class."
+            },
+            {
+                type: "mc",
+                q: "Dalam JS, objek biasanya ditulis dengan kurung...",
+                options: ["()", "[]", "{}", "<>"],
+                answer: 2,
+                essayAnswer: ["{}", "kurawal"],
+                explanation: "Objek literal di JS ditulis dengan { update: '...' }."
+            }
+        ]
+    },
+    {
+        id: 9,
+        title: "Level 9: Logika Algoritma",
+        description: "Studi kasus sederhana dan pemecahan masalah.",
+        questions: [
+            {
+                type: "mc",
+                q: "Algoritma untuk menukar isi dua gelas (A dan B) membutuhkan...",
+                options: ["Gelas C (cadangan)", "Langsung tuang A ke B", "Pecahkan gelas", "Minum isinya"],
+                answer: 0,
+                essayAnswer: ["gelas c", "temp", "variabel sementara"],
+                explanation: "Kita butuh variabel sementara (temp) untuk menampung isi A sebelum A diisi B."
+            },
+            {
+                type: "mc",
+                q: "Apa itu 'Pseudocode'?",
+                options: ["Kode palsu / Rancangan kode", "Kode yang error", "Bahasa mesin", "Komentar"],
+                answer: 0,
+                essayAnswer: ["rancangan", "kode semu", "deskripsi"],
+                explanation: "Pseudocode adalah deskripsi algoritma yang mirip kode tapi untuk dibaca manusia."
+            },
+            {
+                type: "mc",
+                q: "Flowchart menggunakan simbol 'Belah Ketupat' untuk...",
+                options: ["Start/End", "Process", "Keputusan / Decision", "Input/Output"],
+                answer: 2,
+                essayAnswer: ["keputusan", "decision", "kondisi"],
+                explanation: "Belah ketupat melambangkan percabangan (Ya/Tidak) dalam diagram alir."
+            },
+            {
+                type: "mc",
+                q: "Algoritma pengurutan data dari kecil ke besar disebut...",
+                options: ["Sorting Ascending", "Sorting Descending", "Search", "Looping"],
+                answer: 0,
+                essayAnswer: ["ascending", "sort ascending"],
+                explanation: "Ascending (menanjak) berarti urut dari kecil ke besar."
+            },
+            {
+                type: "mc",
+                q: "Pencarian data dengan mengecek satu persatu disebut...",
+                options: ["Binary Search", "Linear / Sequential Search", "Google Search", "Quick Sort"],
+                answer: 1,
+                essayAnswer: ["linear", "sequential", "berurutan"],
+                explanation: "Linear search mengecek setiap elemen dari awal sampai ketemu."
+            },
+            {
+                type: "mc",
+                q: "Looping bersarang (Nested Loop) sering digunakan untuk...",
+                options: ["Memproses matriks / pola", "Menghitung 1+1", "Membuat variabel", "Input data"],
+                answer: 0,
+                essayAnswer: ["matriks", "pola", "nested"],
+                explanation: "Loop di dalam loop diperlukan untuk akses data 2 dimensi (baris & kolom)."
+            },
+            {
+                type: "mc",
+                q: "Jika algoritma tidak pernah berhenti (infinite loop), itu adalah...",
+                options: ["Fitur", "Logical Error", "Syntax Error", "Hardware Error"],
+                answer: 1,
+                essayAnswer: ["logical error", "kesalahan logika"],
+                explanation: "Kesalahan logika menyebabkan program jalan tapi hasilnya salah/macet."
+            }
+        ]
+    },
+    {
+        id: 10,
+        title: "Level 10: Konsep Pemrograman Web",
+        description: "Dasar HTML, CSS, JavaScript, dan alur kerja web.",
+        questions: [
+            {
+                type: "mc",
+                q: "Tiga pilar utama web frontend adalah...",
+                options: ["HTML, CSS, JavaScript", "Java, C++, Python", "Word, Excel, PPT", "Wifi, Browser, Mouse"],
+                answer: 0,
+                essayAnswer: ["html css javascript", "html css js"],
+                explanation: "HTML untuk struktur, CSS untuk gaya, JS untuk interaksi."
+            },
+            {
+                type: "mc",
+                q: "Fungsi utama 'Browser' adalah...",
+                options: ["Mengedit foto", "Menerjemahkan kode web & menampilkannya", "Membuat server", "Database"],
+                answer: 1,
+                essayAnswer: ["render", "menampilkan web"],
+                explanation: "Browser (Chrome, Firefox) merender kode HTML/CSS/JS menjadi tampilan visual."
+            },
+            {
+                type: "mc",
+                q: "Di mana biasanya file website disimpan agar bisa diakses internet?",
+                options: ["Harddisk pribadi", "Web Server / Hosting", "Flashdisk", "Printer"],
+                answer: 1,
+                essayAnswer: ["server", "hosting", "web server"],
+                explanation: "Website di-hosting di server yang selalu online agar bisa diakses siapa saja."
+            },
+            {
+                type: "mc",
+                q: "CSS adalah singkatan dari...",
+                options: ["Computer Style Sheet", "Cascading Style Sheets", "Creative Style System", "Code Style Source"],
+                answer: 1,
+                essayAnswer: ["cascading style sheets"],
+                explanation: "Cascading Style Sheets mengatur tampilan halaman web."
+            },
+            {
+                type: "mc",
+                q: "Apa fungsi JavaScript di website?",
+                options: ["Membuat struktur", "Mewarnai teks", "Membuat interaksi & logika dinamis", "Menyimpan gambar"],
+                answer: 2,
+                essayAnswer: ["interaksi", "dinamis", "logika"],
+                explanation: "JS membuat web 'hidup' (slider, validasi form, game, dll)."
+            },
+            {
+                type: "mc",
+                q: "Apa itu 'Responsive Design'?",
+                options: ["Desain yang merespon suara", "Tampilan menyesuaikan ukuran layar (HP/PC)", "Desain mahal", "Web lambat"],
+                answer: 1,
+                essayAnswer: ["menyesuaikan layar", "responsif", "mobile friendly"],
+                explanation: "Web responsif terlihat bagus di berbagai ukuran perangkat (Desktop, Tablet, HP)."
+            },
+            {
+                type: "mc",
+                q: "Full-Stack Developer adalah...",
+                options: ["Ahli Frontend & Backend", "Hanya bisa HTML", "Pembuat Database saja", "Teknisi jaringan"],
+                answer: 0,
+                essayAnswer: ["frontend backend", "semuanya", "fullstack"],
+                explanation: "Full-Stack menguasai sisi klien (frontend) dan sisi server (backend)."
             }
         ]
     }
@@ -324,8 +639,28 @@ let currentState = {
     score: 0,
     qIdx: 0,
     mode: 'multiple-choice', // 'multiple-choice' or 'essay'
-    maxUnlockedLevel: 1
+    mode: 'multiple-choice', // 'multiple-choice' or 'essay'
+    maxUnlockedLevel: 1,
+    levelProgress: {} // { levelId: { score: 0, stars: 0 } }
 };
+
+// Persistence Logic
+function loadProgress() {
+    const saved = localStorage.getItem('pemrogramanQuizProgress');
+    if (saved) {
+        const parsed = JSON.parse(saved);
+        currentState.maxUnlockedLevel = parsed.maxUnlockedLevel || 1;
+        currentState.levelProgress = parsed.levelProgress || {};
+    }
+}
+
+function saveProgress() {
+    const dataToSave = {
+        maxUnlockedLevel: currentState.maxUnlockedLevel,
+        levelProgress: currentState.levelProgress
+    };
+    localStorage.setItem('pemrogramanQuizProgress', JSON.stringify(dataToSave));
+}
 
 // Sound Effects
 const sounds = {
@@ -367,8 +702,10 @@ function showScreen(screenName) {
 }
 
 // Initial Setup
+// Initial Setup
 document.getElementById('btn-start').addEventListener('click', () => {
     playSound('click');
+    loadProgress(); // Load before showing grid
     renderLevelGrid();
     showScreen('level');
 });
@@ -385,13 +722,23 @@ function renderLevelGrid() {
 
     LEVELS.forEach((level, idx) => {
         const isLocked = (idx + 1) > currentState.maxUnlockedLevel;
+        const progress = currentState.levelProgress[level.id]; // Access by ID (1-based)
+        const stars = progress ? progress.stars : 0;
+
         const card = document.createElement('div');
         card.className = `level-card ${isLocked ? 'locked' : ''}`;
+
+        // Generate stars HTML
+        let starsHtml = '';
+        if (stars > 0) {
+            starsHtml = `<div class="card-stars">` + '★'.repeat(stars) + '☆'.repeat(3 - stars) + `</div>`;
+        }
 
         card.innerHTML = `
             <div class="level-info">
                 <h3>${level.title}</h3>
                 <p>${level.description}</p>
+                ${starsHtml}
             </div>
             <div class="level-status">
                 ${isLocked ? '🔒' : '▶'}
@@ -432,6 +779,15 @@ document.querySelector('.close-modal').addEventListener('click', () => {
     modals.mode.classList.add('hidden');
 });
 
+// Helper: Fisher-Yates Shuffle
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 // Game Logic
 function startLevel(levelIdx, mode) {
     currentState.levelIdx = levelIdx;
@@ -440,11 +796,11 @@ function startLevel(levelIdx, mode) {
     currentState.score = 0;
     currentState.qIdx = 0;
 
-    // Shuffle questions? Requirement says "7 soal acak".
-    // Let's shuffle a copy of questions
-    currentState.questions = [...currentState.currentLevel.questions]
-        .sort(() => 0.5 - Math.random())
-        .slice(0, 7); // Take 7 questions
+    // Use robust shuffle for questions
+    // Copy the original questions array to avoid modifying the const data directly (though usually safe if just sorting user copy)
+    // Then shuffle and slice
+    const allQuestions = [...currentState.currentLevel.questions];
+    currentState.questions = shuffleArray(allQuestions).slice(0, 7);
 
     updateGameHeader();
     showScreen('game');
@@ -600,12 +956,24 @@ function getStarRating(score) {
 }
 
 function getBadge(levelIdx) {
-    // Level is 0-indexed in code (0-6), user sees 1-7
+    // Level is 0-indexed in code (0-9), user sees 1-10
     const userLevel = levelIdx + 1;
-    if (userLevel <= 2) return { title: "Pemula", icon: "🌱" };
-    if (userLevel <= 4) return { title: "Programmer Muda", icon: "💻" };
-    return { title: "Coding Hero", icon: "🦸‍♂️" };
+    if (userLevel <= 3) return { title: "Beginner Coder", icon: "🎖️" };
+    if (userLevel <= 6) return { title: "Junior Programmer", icon: "🏅" };
+    if (userLevel <= 9) return { title: "Advanced Coder", icon: "🥇" };
+    return { title: "Coding Master", icon: "👑" };
 }
+
+// Back Button Logic
+document.getElementById('btn-back-quiz').addEventListener('click', () => {
+    playSound('click');
+    if (confirm("Apakah kamu yakin ingin kembali? Progres soal pada level ini akan diulang.")) {
+        showScreen('level');
+        // Reset game state slightly so if they re-enter it starts fresh
+        currentState.qIdx = 0;
+        currentState.score = 0;
+    }
+});
 
 function endLevel() {
     showScreen('result');
@@ -633,6 +1001,28 @@ function endLevel() {
     const badgeContainer = document.getElementById('badge-display');
     if (passed) {
         playSound('levelup');
+
+        // SAVE PROGRESS
+        const levelId = currentState.currentLevel.id;
+        // Only update if new score is better or first time
+        const currentBest = currentState.levelProgress[levelId];
+        if (!currentBest || finalScore > currentBest.score) {
+            currentState.levelProgress[levelId] = {
+                score: finalScore,
+                stars: starCount
+            };
+        }
+
+        // Unlock next level logic
+        if (currentState.levelIdx + 1 < LEVELS.length) {
+            if (currentState.levelIdx + 1 >= currentState.maxUnlockedLevel) {
+                currentState.maxUnlockedLevel = currentState.levelIdx + 2; // Unlock next (+2 because idx is 0-based, levels are 1-based, and we want NEXT level)
+            }
+        }
+
+        saveProgress();
+        // END SAVE PROGRESS
+
         const badgeData = getBadge(currentState.levelIdx);
         document.getElementById('badge-icon').textContent = badgeData.icon;
         document.getElementById('badge-name').textContent = badgeData.title;
@@ -653,9 +1043,6 @@ function endLevel() {
 
     if (passed) {
         if (currentState.levelIdx + 1 < LEVELS.length) {
-            if (currentState.levelIdx + 1 >= currentState.maxUnlockedLevel) {
-                currentState.maxUnlockedLevel = currentState.levelIdx + 2;
-            }
             nextLevelBtn.classList.remove('hidden');
         } else {
             nextLevelBtn.classList.add('hidden');
