@@ -663,18 +663,104 @@ function saveProgress() {
 }
 
 // Sound Effects
-const sounds = {
-    click: document.getElementById('sfx-click'),
-    correct: document.getElementById('sfx-correct'),
-    wrong: document.getElementById('sfx-wrong'),
-    levelup: document.getElementById('sfx-levelup')
+// --- WEB AUDIO API SOUND SYSTEM ---
+const AudioEngine = {
+    ctx: null,
+    bgmOscillators: [],
+    bgmGain: null,
+    isPlayingBGM: false,
+
+    init: function () {
+        if (!this.ctx) {
+            const AudioContext = window.AudioContext || window.webkitAudioContext;
+            this.ctx = new AudioContext();
+        }
+        if (this.ctx.state === 'suspended') {
+            this.ctx.resume();
+        }
+    },
+
+    playTone: function (freq, type, duration, startTime = 0, volume = 0.1) {
+        if (!this.ctx) this.init();
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, this.ctx.currentTime + startTime);
+
+        gain.gain.setValueAtTime(volume, this.ctx.currentTime + startTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + startTime + duration);
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.start(this.ctx.currentTime + startTime);
+        osc.stop(this.ctx.currentTime + startTime + duration);
+    },
+
+    // SFX: Click
+    click: function () {
+        // Short high blip
+        this.playTone(600, 'sine', 0.1, 0, 0.1);
+    },
+
+    // SFX: Correct (Ding-Dong)
+    correct: function () {
+        // C5 then E5
+        this.playTone(523.25, 'sine', 0.3, 0, 0.1); // C
+        this.playTone(659.25, 'sine', 0.4, 0.2, 0.1); // E
+    },
+
+    // SFX: Wrong (Low Buzz)
+    wrong: function () {
+        // Low Sawtooth
+        this.playTone(150, 'sawtooth', 0.3, 0, 0.15);
+        this.playTone(130, 'sawtooth', 0.3, 0.1, 0.15);
+    },
+
+    // SFX: Level Up (Fanfare)
+    levelup: function () {
+        const now = 0;
+        // C - E - G - C(high)
+        this.playTone(523.25, 'square', 0.2, now, 0.1);
+        this.playTone(659.25, 'square', 0.2, now + 0.15, 0.1);
+        this.playTone(783.99, 'square', 0.2, now + 0.30, 0.1);
+        this.playTone(1046.50, 'square', 0.6, now + 0.45, 0.1);
+    },
+
+    // BGM: Simple Ambient Loop using Oscillator scheduling is complex for infinite loop without checking time.
+    // Instead, we'll use a simple "tick" interval for a sequence.
+    bgmInterval: null,
+    bgmNoteIndex: 0,
+    bgmNotes: [261.63, 329.63, 392.00, 329.63], // C-E-G-E Arpeggio background
+
+    startBGM: function () {
+        // Disabled
+    },
+
+    stopBGM: function () {
+        this.isPlayingBGM = false;
+        if (this.bgmInterval) {
+            clearInterval(this.bgmInterval);
+            this.bgmInterval = null;
+        }
+    }
 };
 
 function playSound(type) {
-    if (sounds[type]) {
-        sounds[type].currentTime = 0; // Rewind to start
-        sounds[type].play().catch(e => console.log("Audio play failed:", e));
-    }
+    // Map old calls to new engine
+    if (type === 'click') AudioEngine.click();
+    if (type === 'correct') AudioEngine.correct();
+    if (type === 'wrong') AudioEngine.wrong();
+    if (type === 'levelup') AudioEngine.levelup();
+}
+
+function playBGM() {
+    AudioEngine.startBGM();
+}
+
+function stopBGM() {
+    AudioEngine.stopBGM();
 }
 
 // DOM Elements
@@ -705,6 +791,7 @@ function showScreen(screenName) {
 // Initial Setup
 document.getElementById('btn-start').addEventListener('click', () => {
     playSound('click');
+    // playBGM(); // Disabled
     loadProgress(); // Load before showing grid
     renderLevelGrid();
     showScreen('level');
@@ -713,7 +800,15 @@ document.getElementById('btn-start').addEventListener('click', () => {
 document.querySelector('.back-home').addEventListener('click', () => {
     playSound('click');
     showScreen('welcome');
+    // playBGM(); // Disabled
 });
+
+// Try to autoplay BGM on load (might be blocked)
+window.addEventListener('click', () => {
+    if (document.getElementById('welcome-screen').classList.contains('active')) {
+        // playBGM(); // Disabled
+    }
+}, { once: true });
 
 // Level Selection Logic
 function renderLevelGrid() {
@@ -804,6 +899,10 @@ function startLevel(levelIdx, mode) {
 
     updateGameHeader();
     showScreen('game');
+
+    // Stop BGM when game starts (as per requirement for BGM on main/level screens only)
+    stopBGM();
+
     loadQuestion();
 }
 
@@ -969,6 +1068,7 @@ document.getElementById('btn-back-quiz').addEventListener('click', () => {
     playSound('click');
     if (confirm("Apakah kamu yakin ingin kembali? Progres soal pada level ini akan diulang.")) {
         showScreen('level');
+        // playBGM(); // Disabled
         // Reset game state slightly so if they re-enter it starts fresh
         currentState.qIdx = 0;
         currentState.score = 0;
@@ -1073,4 +1173,5 @@ document.getElementById('btn-next-level').addEventListener('click', () => {
 document.getElementById('btn-home').addEventListener('click', () => {
     playSound('click');
     showScreen('welcome');
+    // playBGM(); // Disabled
 });
